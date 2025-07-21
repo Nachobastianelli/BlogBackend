@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Editor folders and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: si usás cobertura de tests
+coverage/
+
+# MongoDB data (si por casualidad tenés carpetas locales de datos)
+data/
+
+# Debug output
+debug.log
+
+
+
