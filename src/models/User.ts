@@ -10,6 +10,8 @@ export interface IUser extends Document {
   hashedPassword: string;
   createdAt: Date;
   updatedAt: Date;
+
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 const UserSchema = new Schema<IUser>(
@@ -39,5 +41,11 @@ UserSchema.pre("save", async function (next) {
   this.hashedPassword = await bcrypt.hash(this.hashedPassword, salt);
   next();
 });
+
+UserSchema.methods.comparePassword = function (
+  candidatePassword: string
+): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.hashedPassword);
+};
 
 export const User = model<IUser>("User", UserSchema);

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connectDB } from "./config/db";
+import userRouter from "./routers/User.routes";
+import "./events/eventsListeners";
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 connectDB();
+
+app.use("/users", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Blog Development API!");
