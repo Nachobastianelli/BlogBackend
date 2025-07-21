@@ -2,11 +2,11 @@
 
 ## Tecnologías
 
-- Node.js  
-- TypeScript  
-- Express  
-- MongoDB  
-- Mongoose  
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript logo" style="vertical-align:middle;" />&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" height="40" alt="express logo" style="vertical-align:middle;" />&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" height="40" alt="mongodb logo" style="vertical-align:middle;" />&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs logo" style="vertical-align:middle;" />
+
 
 ## Descripción
 
@@ -29,4 +29,4 @@ A través de este proyecto se busca practicar:
 - Implementación de comentarios en posts  
 - Validación de datos  
 - Encriptación segura de contraseñas  
-- Manejo de eventos internos con eventEmmiter
+- Manejo de eventos internos con EventEmitter  
