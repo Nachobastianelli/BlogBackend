@@ -5,7 +5,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { connectDB } from "./config/db";
 import userRouter from "./routers/User.routes";
+import emailRouter from "./services/Mail.services";
 import "./events/eventsListeners";
+import { transporter } from "./utils/mailer";
 
 dotenv.config();
 
@@ -20,7 +22,9 @@ app.use(express.json());
 
 connectDB();
 
-app.use("/users", userRouter);
+app.use("/api/users", userRouter);
+
+app.use("/api/email", emailRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Blog Development API!");

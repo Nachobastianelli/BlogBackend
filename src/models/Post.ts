@@ -1,6 +1,6 @@
 import { model, Document, Schema, Types } from "mongoose";
 
-interface ContentBlock {
+export interface ContentBlock {
   type: "text" | "image";
   value: string;
 }

@@ -1,0 +1,8 @@
+POST http://localhost:1111/api/email/login
+Content-Type: application/json
+
+{
+  "email": "nachobastianelli2003@gmail.com",
+  "subject": "Este es tu codigo loco: ",
+  "body": "<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8' /><title>Email</title><style>body {background-color: #f4f4f4;font-family: Arial, sans-serif;margin: 0;padding: 0;}.container {max-width: 600px;margin: auto;background-color: #ffffff;padding: 20px;border-radius: 6px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);}.header {background-color: #4a90e2;color: white;padding: 20px;text-align: center;border-radius: 6px 6px 0 0;}.content {padding: 20px;color: #333333;font-size: 16px;line-height: 1.5;}.footer {text-align: center;color: #999999;font-size: 12px;margin-top: 20px;}.button {display: inline-block;padding: 10px 20px;margin-top: 20px;background-color: #4a90e2;color: white;text-decoration: none;border-radius: 4px;}</style></head><body><div class='container'><div class='header'><h1>¡Hola, Nacho!</h1></div><div class='content'><p>Gracias por utilizar nuestra aplicación.</p><p>Este es un ejemplo de correo HTML con estilos básicos.</p><p>Podés personalizar este diseño con tu contenido, colores y marca.</p><a href='https://tu-sitio.com' class='button'>Ir al sitio</a></div><div class='footer'>© 2025 Tu Empresa. Todos los derechos reservados.</div></div></body></html>"
+}

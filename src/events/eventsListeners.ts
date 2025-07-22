@@ -12,3 +12,7 @@ appEvents.on("postCreated", (post) => {
   const now = new Date().toLocaleString(); // fecha y hora local legible
   logger.info(`Se creo un nuevo articulo ${post.title} a las: ${now}`);
 });
+
+appEvents.on("mandarMails", (subscribers, content) => {
+  //Funcion para llamar al gateway de emails
+});
