@@ -1,5 +1,6 @@
 import { appEvents } from "../events/events";
 import { IUser, User } from "../models/User";
+import { escapeRegex } from "../utils/escapeRegex";
 
 interface CreateUserDTO {
   firstname: string;
@@ -43,6 +44,21 @@ export class UserService {
 
   static async getUserById(id: string): Promise<IUser | null> {
     return User.findById(id).exec();
+  }
+
+  static async getUsersByName(
+    username: string,
+    lastname: string
+  ): Promise<IUser[] | null> {
+    const safeUsername = escapeRegex(username);
+    const safeLastname = escapeRegex(lastname);
+
+    return User.find({
+      $or: [
+        { firstname: { $regex: `^${safeUsername}`, $options: "i" } },
+        { lastname: { $regex: `^${safeLastname}`, $options: "i" } },
+      ],
+    });
   }
 
   static async updateUser(

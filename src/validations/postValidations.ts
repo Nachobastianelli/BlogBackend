@@ -1,39 +1,66 @@
 import { Types } from "mongoose";
 import { z } from "zod";
+import { objectIdField } from "../utils/validateID";
+
+const contentItemSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("text"),
+    value: z.string(),
+  }),
+  z.object({
+    type: z.literal("image"),
+    value: z.object({
+      url: z.string().url(),
+      alt: z.string().optional(),
+    }),
+  }),
+]);
 
 export const createPostSchema = z.object({
-  title: z.string().min(1, "El titulo es obligatorio"),
-  description: z
-    .string()
-    .min(10, "La descripcion es obligatoria y debe ser >= 10 ;)"),
-  cover: z.string().url("Debe ser una URL válida"),
-  content: z.array(
-    z.object({
-      type: z.string(),
-      value: z.any(),
+  title: z
+    .string({
+      required_error: "Title is required",
+      invalid_type_error: "Title must be a string",
     })
-  ),
-  userId: z.string().regex(/^[0-9a-fA-F]{24}$/, "ID de usuario inválido"), // validamos que parezca un ObjectId
+    .min(1, "Title must have at least 1 character long"),
+  description: z
+    .string({
+      required_error: "Description is required",
+      invalid_type_error: "Description must be a string",
+    })
+    .min(10, "Description must have at least 10 characters long"),
+  cover: z
+    .string({
+      required_error: "Cover is required",
+      invalid_type_error: "Cover must be a valid URL",
+    })
+    .url("Invalid URL"),
+  content: z
+    .array(contentItemSchema)
+    .nonempty("Content must have at least one item"),
+  userId: objectIdField("userId"),
   date: z.coerce.date(), // acepta string y lo convierte a Date
 });
 
-export const updatePostSchema = z.object({
-  title: z.string().min(1).optional(),
-  description: z.string().min(1).optional(),
-  cover: z.string().url("Debe ser una URL válida").optional(),
-  content: z
-    .array(
-      z.object({
-        type: z.string(),
-        value: z.any(),
-      })
-    )
-    .optional(),
-});
-
-//Para validar el id que viene por la request para eliminar/actualizar un Post
-export const objectIdSchema = z
-  .string()
-  .refine((val) => Types.ObjectId.isValid(val), {
-    message: "ID inválido",
+export const updatePostSchema = z
+  .object({
+    title: z
+      .string({ invalid_type_error: "Title must be a string" })
+      .min(1, "Title must have at least 1 character long")
+      .optional(),
+    description: z
+      .string({ invalid_type_error: "Description must be a string" })
+      .min(10, "Description must have at least 10 character long")
+      .optional(),
+    cover: z
+      .string({ invalid_type_error: "Cover must be a URL" })
+      .url("Invalid URL")
+      .optional(),
+    content: z
+      .array(contentItemSchema)
+      .nonempty("Content must have at least one item")
+      .optional(),
+  })
+  .refine((data) => Object.keys(data).length > 0, {
+    message: "At least one field must be provided to update",
   });

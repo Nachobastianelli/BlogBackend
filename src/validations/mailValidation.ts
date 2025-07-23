@@ -1,8 +1,22 @@
-import { Types } from "mongoose";
 import z from "zod";
 
 export const sendMailSchema = z.object({
-  email: z.email("invalid email format"),
-  subject: z.string().min(5, "The subject must be greater than 5 characters"),
-  body: z.string().min(5, "The body must be greater than 5 characters"),
+  email: z
+    .string({
+      invalid_type_error: "Email must be a string",
+      required_error: "Email is required",
+    })
+    .email("Invalid email address"),
+  subject: z
+    .string({
+      required_error: "Subject is required",
+      invalid_type_error: "Subject must be a string",
+    })
+    .min(5, "Subject must have at least 5 characters long"),
+  body: z
+    .string({
+      invalid_type_error: "Body must be a string",
+      required_error: "Body is required",
+    })
+    .min(5, "Body must have at least 5 characters long"),
 });
